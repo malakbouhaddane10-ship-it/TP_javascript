@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 12</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        #conteneur {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .boite {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Responsive Page avec JavaScript</h2>
+
+    <div id="conteneur">
+        <div class="boite">Boîte 1</div>
+        <div class="boite">Boîte 2</div>
+        <div class="boite">Boîte 3</div>
+        <div class="boite">Boîte 4</div>
+    </div>
+
+    <script>
+        function adapterAffichage() {
+            let conteneur = document.getElementById("conteneur");
+
+            if (window.innerWidth < 600) {
+                conteneur.style.gridTemplateColumns = "1fr";
+            } else {
+                conteneur.style.gridTemplateColumns = "repeat(2, 1fr)";
+            }
+        }
+
+        window.addEventListener("resize", adapterAffichage);
+
+        adapterAffichage();
+    </script>
+
+</body>
+</html>

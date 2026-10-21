@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 9</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        .terminee {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        button {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Liste de tâches</h2>
+
+    <input type="text" id="tache" placeholder="Ajouter une tâche">
+
+    <button onclick="ajouterTache()">Ajouter</button>
+
+    <ul id="liste"></ul>
+
+    <script>
+        function ajouterTache() {
+            let champ = document.getElementById("tache");
+            let texte = champ.value.trim();
+
+            if (texte === "") {
+                alert("Veuillez saisir une tâche !");
+                return;
+            }
+
+            let li = document.createElement("li");
+
+            let span = document.createElement("span");
+            span.innerText = texte;
+
+            let boutonTerminer = document.createElement("button");
+            boutonTerminer.innerText = "Terminée";
+
+            boutonTerminer.onclick = function() {
+                span.classList.toggle("terminee");
+            };
+
+            let boutonSupprimer = document.createElement("button");
+            boutonSupprimer.innerText = "Supprimer";
+
+            boutonSupprimer.onclick = function() {
+                li.remove();
+            };
+
+            li.appendChild(span);
+            li.appendChild(boutonTerminer);
+            li.appendChild(boutonSupprimer);
+
+            document.getElementById("liste").appendChild(li);
+
+            champ.value = "";
+        }
+    </script>
+
+</body>
+</html>

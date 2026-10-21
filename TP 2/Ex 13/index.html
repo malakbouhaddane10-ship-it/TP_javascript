@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 13</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+        }
+
+        #barreFond {
+            width: 80%;
+            height: 25px;
+            margin: 30px auto;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #progression {
+            width: 0%;
+            height: 100%;
+            background-color: #4caf50;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #008cba;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Barre de Progression</h2>
+
+    <div id="barreFond">
+        <div id="progression"></div>
+    </div>
+
+    <p id="pourcentage">0%</p>
+
+    <button id="bouton" onclick="demarrer()">
+        Démarrer la Progression
+    </button>
+
+    <script>
+        let intervalle = null;
+
+        function demarrer() {
+            clearInterval(intervalle);
+
+            let valeur = 0;
+            let barre = document.getElementById("progression");
+            let texte = document.getElementById("pourcentage");
+
+            barre.style.width = "0%";
+            texte.innerText = "0%";
+
+            intervalle = setInterval(function() {
+                valeur++;
+
+                barre.style.width = valeur + "%";
+                texte.innerText = valeur + "%";
+
+                if (valeur >= 100) {
+                    clearInterval(intervalle);
+                    intervalle = null;
+                }
+            }, 50);
+        }
+    </script>
+
+</body>
+</html>

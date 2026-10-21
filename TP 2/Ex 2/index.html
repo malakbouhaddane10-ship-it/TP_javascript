@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 2</title>
+</head>
+<body>
+
+    <h2>Afficher / Masquer un texte</h2>
+
+    <p id="texte">
+        Bienvenue dans notre cours JavaScript !
+    </p>
+
+    <button id="bouton" onclick="afficherMasquer()">
+        Masquer
+    </button>
+
+    <script>
+        function afficherMasquer() {
+            let texte = document.getElementById("texte");
+            let bouton = document.getElementById("bouton");
+
+            if (texte.style.display === "none") {
+                texte.style.display = "block";
+                bouton.innerText = "Masquer";
+            } else {
+                texte.style.display = "none";
+                bouton.innerText = "Afficher";
+            }
+        }
+    </script>
+
+</body>
+</html>

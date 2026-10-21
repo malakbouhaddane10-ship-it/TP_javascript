@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 1</title>
+    <style>
+        #bloc {
+            width: 300px;
+            height: 150px;
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Changer la couleur d'un bloc</h2>
+
+    <div id="bloc">Bonjour tout le monde !</div>
+
+    <button onclick="changerCouleur()">
+        Changer la couleur
+    </button>
+
+    <script>
+        function changerCouleur() {
+            let bloc = document.getElementById("bloc");
+
+            if (bloc.style.backgroundColor === "lightgreen") {
+                bloc.style.backgroundColor = "lightblue";
+            } else {
+                bloc.style.backgroundColor = "lightgreen";
+            }
+        }
+    </script>
+
+</body>
+</html>

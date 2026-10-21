@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 5</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+        }
+
+        img {
+            width: 400px;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        button {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Carousel d'images</h2>
+
+    <img id="image" alt="Image du carousel">
+
+    <br>
+
+    <button onclick="precedent()">Précédent</button>
+    <button onclick="suivant()">Suivant</button>
+
+    <script>
+        let images = [
+            "https://picsum.photos/seed/photo1/400/250",
+            "https://picsum.photos/seed/photo2/400/250",
+            "https://picsum.photos/seed/photo3/400/250"
+        ];
+
+        let index = 0;
+
+        function afficherImage() {
+            document.getElementById("image").src = images[index];
+        }
+
+        function suivant() {
+            index = (index + 1) % images.length;
+            afficherImage();
+        }
+
+        function precedent() {
+            index = (index - 1 + images.length) % images.length;
+            afficherImage();
+        }
+
+        afficherImage();
+    </script>
+
+</body>
+</html>

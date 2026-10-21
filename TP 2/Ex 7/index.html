@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 7</title>
+    <style>
+        #timer {
+            font-size: 24px;
+            padding: 20px;
+            background: #eee;
+            display: inline-block;
+            box-shadow: 2px 2px 5px gray;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Timer en temps réel</h2>
+
+    <div id="timer">Temps écoulé : 0 secondes</div>
+
+    <script>
+        let debut = Date.now();
+
+        function actualiserTimer() {
+            let secondes = Math.floor(
+                (Date.now() - debut) / 1000
+            );
+
+            document.getElementById("timer").innerText =
+                "Temps écoulé : " + secondes + " secondes";
+        }
+
+        setInterval(actualiserTimer, 1000);
+    </script>
+
+</body>
+</html>

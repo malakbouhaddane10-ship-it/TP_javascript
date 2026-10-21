@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 11</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        input {
+            width: 350px;
+            padding: 10px;
+        }
+
+        li {
+            list-style: none;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        ul {
+            padding: 0;
+            width: 370px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Liste de Produits</h2>
+
+    <input
+        type="text"
+        id="recherche"
+        placeholder="Rechercher un produit..."
+        oninput="filtrer()"
+    >
+
+    <ul id="produits">
+        <li>Ordinateur Portable</li>
+        <li>Smartphone</li>
+        <li>Casque Audio</li>
+        <li>Écran LED</li>
+        <li>Clavier Mécanique</li>
+        <li>Souris Sans Fil</li>
+    </ul>
+
+    <script>
+        function filtrer() {
+            let recherche = document.getElementById("recherche")
+                .value.toLowerCase();
+
+            let produits = document.querySelectorAll("#produits li");
+
+            produits.forEach(function(produit) {
+                let nom = produit.innerText.toLowerCase();
+
+                if (nom.includes(recherche)) {
+                    produit.style.display = "list-item";
+                } else {
+                    produit.style.display = "none";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

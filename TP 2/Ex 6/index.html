@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 6</title>
+    <style>
+        #menu {
+            width: 250px;
+            background-color: #eee;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.5s ease;
+        }
+
+        #menu.ouvert {
+            max-height: 300px;
+        }
+
+        #titre {
+            background-color: steelblue;
+            color: white;
+            padding: 15px;
+            width: 220px;
+            cursor: pointer;
+        }
+
+        #menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Menu déroulant animé</h2>
+
+    <div id="titre" onclick="ouvrirMenu()">
+        Cliquez pour ouvrir le menu
+    </div>
+
+    <div id="menu">
+        <a href="#">Accueil</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <script>
+        function ouvrirMenu() {
+            let menu = document.getElementById("menu");
+            menu.classList.toggle("ouvert");
+        }
+    </script>
+
+</body>
+</html>

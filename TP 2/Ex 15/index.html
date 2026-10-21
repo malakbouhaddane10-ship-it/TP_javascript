@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 15</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: white;
+            color: black;
+            transition: 0.3s;
+            padding: 40px;
+        }
+
+        body.sombre {
+            background-color: #121212;
+            color: white;
+        }
+
+        button {
+            padding: 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Basculer entre Thème Clair et Sombre</h2>
+
+    <button id="bouton" onclick="changerTheme()">
+        Activer le Thème Sombre
+    </button>
+
+    <script>
+        let bouton = document.getElementById("bouton");
+
+        // Récupérer le thème mémorisé
+        let theme = localStorage.getItem("theme");
+
+        if (theme === "sombre") {
+            document.body.classList.add("sombre");
+        }
+
+        actualiserBouton();
+
+        function changerTheme() {
+            document.body.classList.toggle("sombre");
+
+            let estSombre = document.body.classList.contains("sombre");
+
+            localStorage.setItem(
+                "theme",
+                estSombre ? "sombre" : "clair"
+            );
+
+            actualiserBouton();
+        }
+
+        function actualiserBouton() {
+            let estSombre = document.body.classList.contains("sombre");
+
+            bouton.innerText = estSombre
+                ? "Activer le Thème Clair"
+                : "Activer le Thème Sombre";
+        }
+    </script>
+
+</body>
+</html>

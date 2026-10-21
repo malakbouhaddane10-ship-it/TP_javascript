@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 8</title>
+    <style>
+        #bloc {
+            width: 250px;
+            height: 150px;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Événements de souris</h2>
+
+    <div id="bloc">Passez la souris ici</div>
+
+    <script>
+        let bloc = document.getElementById("bloc");
+
+        bloc.addEventListener("mouseenter", function() {
+            bloc.style.backgroundColor = "#e74c3c";
+        });
+
+        bloc.addEventListener("mouseleave", function() {
+            bloc.style.backgroundColor = "#3498db";
+        });
+    </script>
+
+</body>
+</html>

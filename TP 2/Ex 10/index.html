@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 10</title>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contenu {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Modal de notification</h2>
+
+    <button onclick="ouvrir()">Ouvrir</button>
+
+    <div class="modal" id="modal">
+        <div class="contenu">
+            <h3>Notification</h3>
+            <p>Bienvenue dans notre application !</p>
+            <button onclick="fermer()">Fermer</button>
+        </div>
+    </div>
+
+    <script>
+        function ouvrir() {
+            document.getElementById("modal").style.display = "flex";
+        }
+
+        function fermer() {
+            document.getElementById("modal").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

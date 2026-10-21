@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 4.1</title>
+</head>
+<body>
+
+    <h2>Calculateur JavaScript</h2>
+
+    <input type="number" id="nombre1" placeholder="Premier nombre">
+    <input type="number" id="nombre2" placeholder="Deuxième nombre">
+
+    <br><br>
+
+    <button onclick="calculer('+')">+</button>
+    <button onclick="calculer('-')">-</button>
+    <button onclick="calculer('*')">×</button>
+    <button onclick="calculer('/')">÷</button>
+
+    <h3 id="resultat">Résultat :</h3>
+
+    <script>
+        function calculer(operation) {
+            let champ1 = document.getElementById("nombre1");
+            let champ2 = document.getElementById("nombre2");
+            let affichage = document.getElementById("resultat");
+
+            if (champ1.value === "" || champ2.value === "") {
+                affichage.innerText = "Veuillez saisir deux nombres.";
+                return;
+            }
+
+            let a = Number(champ1.value);
+            let b = Number(champ2.value);
+            let resultat;
+
+            switch (operation) {
+                case "+":
+                    resultat = a + b;
+                    break;
+                case "-":
+                    resultat = a - b;
+                    break;
+                case "*":
+                    resultat = a * b;
+                    break;
+                case "/":
+                    if (b === 0) {
+                        affichage.innerText = "Division par zéro impossible.";
+                        return;
+                    }
+                    resultat = a / b;
+                    break;
+            }
+
+            affichage.innerText = "Résultat : " + resultat;
+        }
+    </script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 4.2</title>
+
+    <style>
+        .calculatrice {
+            width: 240px;
+            padding: 15px;
+            border: 1px solid gray;
+            border-radius: 10px;
+            margin: 30px auto;
+        }
+
+        #ecran {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-bottom: 10px;
+            text-align: right;
+            font-size: 20px;
+        }
+
+        .touches {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculatrice">
+
+    <input type="text" id="ecran" readonly>
+
+    <div class="touches">
+        <button onclick="effacer()">C</button>
+        <button onclick="supprimer()">⌫</button>
+        <button onclick="ajouter('/')">/</button>
+        <button onclick="ajouter('*')">×</button>
+
+        <button onclick="ajouter('7')">7</button>
+        <button onclick="ajouter('8')">8</button>
+        <button onclick="ajouter('9')">9</button>
+        <button onclick="ajouter('-')">−</button>
+
+        <button onclick="ajouter('4')">4</button>
+        <button onclick="ajouter('5')">5</button>
+        <button onclick="ajouter('6')">6</button>
+        <button onclick="ajouter('+')">+</button>
+
+        <button onclick="ajouter('1')">1</button>
+        <button onclick="ajouter('2')">2</button>
+        <button onclick="ajouter('3')">3</button>
+        <button onclick="calculer()">=</button>
+
+        <button onclick="ajouter('0')">0</button>
+        <button onclick="ajouter('.')">.</button>
+    </div>
+
+</div>
+
+<script>
+    let ecran = document.getElementById("ecran");
+
+    function ajouter(valeur) {
+        ecran.value += valeur;
+    }
+
+    function effacer() {
+        ecran.value = "";
+    }
+
+    function supprimer() {
+        ecran.value = ecran.value.slice(0, -1);
+    }
+
+    function calculer() {
+        try {
+            let expression = ecran.value;
+
+            // Accepter uniquement chiffres et opérateurs
+            if (!/^[0-9+\-*/.\s]+$/.test(expression)) {
+                throw new Error("Expression invalide");
+            }
+
+            // Calcul de l'expression arithmétique
+            let resultat = Function(
+                '"use strict"; return (' + expression + ')'
+            )();
+
+            if (!Number.isFinite(resultat)) {
+                throw new Error("Calcul impossible");
+            }
+
+            ecran.value = resultat;
+        } catch (erreur) {
+            ecran.value = "Erreur";
+        }
+    }
+</script>
+
+</body>
+</html>

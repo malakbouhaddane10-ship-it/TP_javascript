@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 3</title>
+</head>
+<body>
+
+    <h2>Formulaire de validation</h2>
+
+    <form id="formulaire">
+
+        <label>Nom :</label>
+        <input type="text" id="nom">
+        <br><br>
+
+        <label>Email :</label>
+        <input type="email" id="email">
+        <br><br>
+
+        <button type="submit">Soumettre</button>
+
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        document.getElementById("formulaire")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                let nom = document.getElementById("nom").value.trim();
+                let email = document.getElementById("email").value.trim();
+                let message = document.getElementById("message");
+
+                if (nom === "" || email === "") {
+                    message.innerText = "Veuillez remplir tous les champs.";
+                    message.style.color = "red";
+                } else {
+                    message.innerText = "Formulaire validé avec succès !";
+                    message.style.color = "green";
+                }
+            });
+    </script>
+
+</body>
+</html>

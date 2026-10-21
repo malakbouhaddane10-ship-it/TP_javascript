@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 14</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .conteneur {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .zone {
+            width: 200px;
+            min-height: 200px;
+            background-color: #eee;
+            border: 2px dashed gray;
+            padding: 15px;
+        }
+
+        .element {
+            padding: 10px;
+            margin: 10px;
+            background-color: #4caf50;
+            color: white;
+            cursor: grab;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Drag and Drop Example</h2>
+
+    <div class="conteneur">
+
+        <div
+            class="zone"
+            id="zone1"
+            ondragover="autoriser(event)"
+            ondrop="deposer(event)"
+        >
+            <h3>À déplacer</h3>
+
+            <div id="element1" class="element"
+                draggable="true" ondragstart="glisser(event)">
+                Élément 1
+            </div>
+
+            <div id="element2" class="element"
+                draggable="true" ondragstart="glisser(event)">
+                Élément 2
+            </div>
+
+            <div id="element3" class="element"
+                draggable="true" ondragstart="glisser(event)">
+                Élément 3
+            </div>
+        </div>
+
+        <div
+            class="zone"
+            id="zone2"
+            ondragover="autoriser(event)"
+            ondrop="deposer(event)"
+        >
+            <h3>Déposer ici</h3>
+        </div>
+
+    </div>
+
+    <script>
+        function glisser(event) {
+            event.dataTransfer.setData(
+                "text/plain", event.target.id
+            );
+        }
+
+        function autoriser(event) {
+            event.preventDefault();
+        }
+
+        function deposer(event) {
+            event.preventDefault();
+
+            let id = event.dataTransfer.getData("text/plain");
+            let element = document.getElementById(id);
+
+            // Trouver la zone de dépôt
+            let zone = event.currentTarget;
+
+            if (element && zone.classList.contains("zone")) {
+                zone.appendChild(element);
+            }
+        }
+    </script>
+
+</body>
+</html>
