@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Exercice 1 - QCM</title>
+<style>
+    body { font-family: Arial; margin: 30px; }
+    .question {
+        border: 1px solid gray;
+        padding: 12px;
+        margin: 12px 0;
+    }
+    label { display: block; margin: 6px; }
+    button { margin: 5px; padding: 8px; }
+    .correct {
+        color: green;
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+
+<h2>Questionnaire QCM</h2>
+
+<form id="formQCM">
+    <div id="questions"></div>
+
+    <button type="reset">Initialiser</button>
+    <button type="button" onclick="afficherCorrige()">
+        Afficher le corrigé
+    </button>
+    <button type="button" onclick="afficherResultat()">
+        Afficher le résultat
+    </button>
+</form>
+
+<script>
+const qcm = [
+    {
+        question: "1. Quels sont des langages de programmation ?",
+        choix: ["Java", "HTML", "Python", "C++"],
+        bonnes: [0, 2, 3],
+        type: "multiple"
+    },
+    {
+        question: "2. Que signifie HTML ?",
+        choix: [
+            "Hyper Text Markup Language",
+            "High Text Machine Language",
+            "Hyper Tool Markup Language"
+        ],
+        bonnes: [0],
+        type: "simple"
+    },
+    {
+        question: "3. Quels sont des navigateurs Web ?",
+        choix: ["Chrome", "Firefox", "Excel", "Edge"],
+        bonnes: [0, 1, 3],
+        type: "multiple"
+    },
+    {
+        question: "4. Quel langage sert à styliser une page Web ?",
+        choix: ["Java", "CSS", "SQL"],
+        bonnes: [1],
+        type: "simple"
+    },
+    {
+        question: "5. Quels éléments sont des balises HTML ?",
+        choix: ["<p>", "<div>", "<section>", "print()"],
+        bonnes: [0, 1, 2],
+        type: "multiple"
+    }
+];
+
+// Affichage des questions
+function chargerQuestions() {
+    const zone = document.getElementById("questions");
+
+    qcm.forEach((q, i) => {
+        const bloc = document.createElement("div");
+        bloc.className = "question";
+
+        const titre = document.createElement("h3");
+        titre.textContent = q.question;
+        bloc.appendChild(titre);
+
+        q.choix.forEach((choix, j) => {
+            const label = document.createElement("label");
+            const input = document.createElement("input");
+
+            input.type = q.type === "multiple"
+                ? "checkbox" : "radio";
+            input.name = "q" + i;
+            input.value = j;
+
+            label.appendChild(input);
+            label.appendChild(document.createTextNode(" " + choix));
+            bloc.appendChild(label);
+        });
+
+        zone.appendChild(bloc);
+    });
+}
+
+function reponsesUtilisateur(i) {
+    return Array.from(document.querySelectorAll(
+        'input[name="q' + i + '"]:checked'
+    )).map(input => Number(input.value));
+}
+
+function estCorrecte(i) {
+    const choix = reponsesUtilisateur(i);
+    const bonnes = qcm[i].bonnes;
+
+    return choix.length === bonnes.length &&
+           bonnes.every(r => choix.includes(r));
+}
+
+function ouvrirFenetre(titre, contenu) {
+    const largeur = Math.min(650, screen.availWidth - 40);
+    const hauteur = Math.min(600, screen.availHeight - 60);
+
+    const fenetre = window.open("", "_blank",
+        `width=${largeur},height=${hauteur},resizable=yes,scrollbars=yes`);
+
+    if (!fenetre) {
+        alert("Autorisez les fenêtres pop-up.");
+        return;
+    }
+
+    fenetre.document.write(`
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+          <meta charset="UTF-8">
+          <title>${titre}</title>
+          <style>
+            body { font-family: Arial; padding: 20px; }
+            .correct { color: green; text-decoration: underline; }
+          </style>
+        </head>
+        <body><h2>${titre}</h2>${contenu}</body>
+        </html>
+    `);
+    fenetre.document.close();
+
+    // Ajustement selon le contenu, si autorisé par le navigateur
+    fenetre.addEventListener("load", () => {
+        const h = fenetre.document.documentElement.scrollHeight + 80;
+        fenetre.resizeTo(largeur, Math.min(h, screen.availHeight));
+    });
+}
+
+function afficherCorrige() {
+    let contenu = "";
+
+    qcm.forEach(q => {
+        contenu += "<h3>" + q.question + "</h3>";
+
+        q.choix.forEach((choix, j) => {
+            const texte = choix
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
+
+            contenu += q.bonnes.includes(j)
+                ? `<p class="correct">${texte}</p>`
+                : `<p>${texte}</p>`;
+        });
+    });
+
+    ouvrirFenetre("Corrigé du QCM", contenu);
+}
+
+function afficherResultat() {
+    let score = 0;
+    let contenu = "";
+
+    qcm.forEach((q, i) => {
+        if (estCorrecte(i)) {
+            contenu += `<p>La réponse de la question
+                ${i + 1} est correcte.</p>`;
+            score++;
+        } else {
+            contenu += `<p>La réponse de la question
+                ${i + 1} est incorrecte.</p>`;
+        }
+    });
+
+    contenu += `<h2>Note finale : ${score}/5</h2>`;
+    ouvrirFenetre("Résultat du QCM", contenu);
+}
+
+chargerQuestions();
+</script>
+
+</body>
+</html>
+
+

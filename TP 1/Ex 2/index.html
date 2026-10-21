@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 2 - Validation Email</title>
+</head>
+<body>
+
+<h2>Vérification d'une adresse e-mail</h2>
+
+<label>Entrez votre adresse e-mail :</label>
+<input type="text" id="email">
+
+<button onclick="verifierEmail()">Vérifier</button>
+
+<p id="resultat"></p>
+
+<script>
+function verifierEmail() {
+    let email = document.getElementById("email").value.trim();
+    let resultat = document.getElementById("resultat");
+
+    let modele = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
+
+    if (modele.test(email)) {
+        resultat.innerText = "Adresse e-mail valide";
+        resultat.style.color = "green";
+    } else {
+        resultat.innerText = "Adresse e-mail invalide";
+        resultat.style.color = "red";
+    }
+}
+</script>
+
+</body>
+</html>

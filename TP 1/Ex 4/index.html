@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 4 - Somme des temps</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 30px;
+        }
+
+        input {
+            width: 75px;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Somme de trois mesures de temps</h2>
+
+<form id="formTemps">
+
+    <p>Entrer le premier temps :</p>
+    Heure(s) <input type="number" id="h1" min="0" value="2">
+    Minute(s) <input type="number" id="m1" min="0" value="2333">
+    Seconde(s) <input type="number" id="s1" min="0" value="2">
+
+    <p>Entrer le deuxième temps :</p>
+    Heure(s) <input type="number" id="h2" min="0" value="23">
+    Minute(s) <input type="number" id="m2" min="0" value="2">
+    Seconde(s) <input type="number" id="s2" min="0" value="1">
+
+    <p>Entrer le troisième temps :</p>
+    Heure(s) <input type="number" id="h3" min="0" value="233">
+    Minute(s) <input type="number" id="m3" min="0" value="23">
+    Seconde(s) <input type="number" id="s3" min="0" value="23344">
+
+    <h3>Total des trois temps :</h3>
+
+    Jour(s) <input type="number" id="jours" readonly>
+    Heure(s) <input type="number" id="heures" readonly>
+    Minute(s) <input type="number" id="minutes" readonly>
+    Seconde(s) <input type="number" id="secondes" readonly>
+
+    <br>
+
+    <button type="button" onclick="calculerSomme()">
+        Somme
+    </button>
+
+    <button type="reset">Effacer</button>
+
+</form>
+
+<script>
+function calculerSomme() {
+
+    function lire(id) {
+        let champ = document.getElementById(id);
+        let valeur = Number(champ.value);
+
+        if (champ.value.trim() === "" ||
+            !Number.isSafeInteger(valeur) || valeur < 0) {
+            throw new Error("Entrez des entiers positifs ou nuls.");
+        }
+
+        return valeur;
+    }
+
+    try {
+        let h1 = lire("h1");
+        let m1 = lire("m1");
+        let s1 = lire("s1");
+
+        let h2 = lire("h2");
+        let m2 = lire("m2");
+        let s2 = lire("s2");
+
+        let h3 = lire("h3");
+        let m3 = lire("m3");
+        let s3 = lire("s3");
+
+        // Convertir toutes les durées en secondes
+        let total =
+            (h1 * 3600 + m1 * 60 + s1) +
+            (h2 * 3600 + m2 * 60 + s2) +
+            (h3 * 3600 + m3 * 60 + s3);
+
+        if (!Number.isSafeInteger(total)) {
+            alert("La durée totale est trop grande.");
+            return;
+        }
+
+        // Convertir en jours, heures, minutes, secondes
+        let jours = Math.floor(total / 86400);
+        total = total % 86400;
+
+        let heures = Math.floor(total / 3600);
+        total = total % 3600;
+
+        let minutes = Math.floor(total / 60);
+        let secondes = total % 60;
+
+        // Afficher les résultats
+        document.getElementById("jours").value = jours;
+        document.getElementById("heures").value = heures;
+        document.getElementById("minutes").value = minutes;
+        document.getElementById("secondes").value = secondes;
+
+    } catch (erreur) {
+        alert(erreur.message);
+    }
+}
+</script>
+
+</body>
+</html>

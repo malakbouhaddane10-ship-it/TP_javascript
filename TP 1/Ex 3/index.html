@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice 3 - Trier un tableau</title>
+</head>
+<body>
+
+<h2>Tri d'un tableau de nombres</h2>
+
+<p>Liste initiale : <span id="listeInitiale"></span></p>
+
+<button onclick="afficherTri()">Trier</button>
+
+<p>Liste triée : <span id="resultat"></span></p>
+
+<script>
+    let nombres = [25, 3, 10, 8, 45, 1, 12];
+
+    document.getElementById("listeInitiale").innerText =
+        nombres.join(", ");
+
+    function trier(liste) {
+        return [...liste].sort(function(a, b) {
+            return a - b;
+        });
+    }
+
+    function afficherTri() {
+        let resultat = trier(nombres);
+
+        document.getElementById("resultat").innerText =
+            resultat.join(", ");
+    }
+</script>
+
+</body>
+</html>
